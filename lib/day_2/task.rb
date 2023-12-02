@@ -8,23 +8,26 @@ module Day2
 
     def call1
       input.select do |game|
-        game.rounds.all? do |round|
-          valid?(round)
+        game.round.all? do |set|
+          value, color = set.split(' ')
+          VALID_VALUES[color.to_sym] >= value.to_i
         end
       end.map(&:id).sum
     end
 
-    def call2; end
+    def call2
+      input.map do |game|
+        power = { 'red' => 1, 'green' => 1, 'blue' => 1 }
+        game.round.each do |set|
+          value, color = set.split(' ')
+          power[color] = value.to_i  if power[color] < value.to_i
+        end
+        power.values.inject(:*)
+      end.sum
+    end
 
     def input
       @input ||= Input.call(@sample)
-    end
-
-    def valid?(round)
-      round.all? do |set|
-        value, color = set.split(' ')
-        VALID_VALUES[color.to_sym] >= value.to_i
-      end
     end
   end
 end

@@ -24,7 +24,7 @@ describe Day2::Task do
       let(:sample) { true }
 
       it 'works' do
-        expect(task.call2).to eq(nil)
+        expect(task.call2).to eq(2286)
       end
     end
 
