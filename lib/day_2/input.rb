@@ -6,9 +6,7 @@ module Day2
 
       def call(sample)
         data(sample).split("\n").map do |row|
-          a = row.split(': ')
-          id = a[0].sub('Game ', '').to_i
-          round = a[1].split(/, |; /)
+          id, round = row.split(': ')
           Game.new(id: id, round: round)
         end
       end
@@ -23,8 +21,8 @@ module Day2
     attr_reader :id, :round
 
     def initialize(id:, round:)
-      @id = id
-      @round = round
+      @id = id.sub('Game ', '').to_i
+      @round = round.split(/, |; /)
     end
   end
 end
