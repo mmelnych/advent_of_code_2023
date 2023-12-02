@@ -22,7 +22,7 @@ module Day2
 
     def initialize(id:, round:)
       @id = id.sub('Game ', '').to_i
-      @round = round.split(/, |; /)
+      @round = round.split(/[,;] /).map { |set| set.split(' ') }
     end
   end
 end
